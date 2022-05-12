@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blood_donation_camps",
+  "info": {
+    "name": "BloodDonationCamps",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Address": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "Time": {
+      "type": "time"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Name"
+    },
+    "ContactNumber": {
+      "type": "biginteger"
+    },
+    "People": {
+      "type": "json"
+    }
+  }
+}

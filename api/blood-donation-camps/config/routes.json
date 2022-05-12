@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/blood-donation-camps",
+      "handler": "blood-donation-camps.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/blood-donation-camps/count",
+      "handler": "blood-donation-camps.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/blood-donation-camps/:id",
+      "handler": "blood-donation-camps.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/blood-donation-camps",
+      "handler": "blood-donation-camps.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/blood-donation-camps/:id",
+      "handler": "blood-donation-camps.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/blood-donation-camps/:id",
+      "handler": "blood-donation-camps.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
