@@ -16,18 +16,32 @@ module.exports = {
           const res = await strapi
             .query("blood-donation-camps")
             .findOne({ id });
-          console.log(res);
+          //console.log(res);
           const users = await strapi.query("user", "users-permissions").find();
           const emails = users.map((a) => a.email);
+          //console.log(users);
+          const phoneNumbers = users.map((a) => a.PhoneNumber);
+          const phone = phoneNumbers.filter((element) => {
+            return element !== undefined;
+          });
+          const phones = phone.map((a) => {
+            return "+91" + a;
+          });
+         // console.log(phones);
           let time = res.Time.toString();
           time = time.substring(0, 5);
+
           try {
+            /*strapi.services.sms.sendSms(
+              `There is an Upcoming blood donation camp titled   "${res.Name}"\n at ${res.Address} Date=${res.Date}.\nPLease check out the website for more info.\n Link: ${process.env.APP_URL}/${res.slug}   `,
+              phones
+            );*/
             for (let i = 0; i < emails.length; i++) {
               await strapi.plugins["email"].services.email.send({
                 to: emails[i],
-                from: "srijan_201800150@smit.smu.edu.in",
+                from: "sikkim.co.blood@gmail.com",
                 subject: "A Blood Donation Camp Nearby ",
-                text: `There is an Upcoming blood donation camp titled   "${res.Name}"\n at ${res.Address} time=${time}.\nPLease check out the website for more info. Link: localhost:3000/camps/${res.slug}   `,
+                text: `There is an Upcoming blood donation camp titled: "${res.Name}"\n at ${res.Address} Date=${res.Date}.\nPLease check out the website for more info.\n Link: ${process.env.APP_URL}/${res.slug}   `,
               });
             }
           } catch (err) {
@@ -36,7 +50,5 @@ module.exports = {
         }
       }
     },
-
-    
   },
 };

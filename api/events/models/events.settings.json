@@ -16,8 +16,7 @@
       "type": "string"
     },
     "slug": {
-      "type": "uid",
-      "targetField": "name"
+      "type": "uid"
     },
     "venue": {
       "type": "string"
@@ -54,8 +53,8 @@
     "BloodType": {
       "type": "string"
     },
-    "Recieved": {
-      "type": "boolean"
+    "Donors": {
+      "type": "json"
     }
   }
 }

@@ -66,9 +66,6 @@
     "BloodType": {
       "type": "string"
     },
-    "Active": {
-      "type": "boolean"
-    },
     "ProfilePicture": {
       "model": "file",
       "via": "related",
@@ -86,6 +83,9 @@
     },
     "PhoneNumber": {
       "type": "biginteger"
+    },
+    "address": {
+      "type": "string"
     }
   }
 }

@@ -12,6 +12,7 @@
   "dependencies": {
     "@strapi/provider-email-sendgrid": "^4.1.7",
     "@strapi/provider-upload-cloudinary": "^4.1.2",
+    "fast-two-sms": "^3.0.0",
     "knex": "0.21.18",
     "slugify": "^1.6.5",
     "sqlite3": "5.0.0",
@@ -26,7 +27,8 @@
     "strapi-plugin-users-permissions": "3.6.8",
     "strapi-provider-email-sendgrid": "^3.6.8",
     "strapi-provider-upload-cloudinary": "^3.6.8",
-    "strapi-utils": "3.6.8"
+    "strapi-utils": "3.6.8",
+    "twilio": "^3.77.0"
   },
   "author": {
     "name": "A Strapi developer"

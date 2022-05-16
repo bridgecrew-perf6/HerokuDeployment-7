@@ -7,12 +7,23 @@ module.exports = {
   lifecycles: {
     beforeCreate: async (data) => {
       if (data.name) {
-        data.slug = slugify(data.name, { lower: true });
+        var text = "XL";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        for (var i = 0; i < 6; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        data.slug = slugify(text, { lower: true });
       }
     },
     beforeUpdate: async (params, data) => {
       if (data.name) {
-        data.slug = slugify(data.name, { lower: true });
+        var text = "XL";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        for (var i = 0; i < 6; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+        data.slug = slugify(text, { lower: true });
       }
     },
 
@@ -20,7 +31,7 @@ module.exports = {
       console.log(data);
       if (data.published_at != null) {
         const { id } = params;
-        console.log(id);
+        //console.log(id);
         const previousData = await strapi.query("events").findOne({ id });
         const previousPublishedAt = previousData.published_at;
         const currentPublished_at = data.published_at;
@@ -40,21 +51,43 @@ module.exports = {
           const emails = results.filter((element) => {
             return element !== undefined;
           });
-          //console.log(emails);
-
+          const phoneNumbers = users.map((a) => {
+            if (a.BloodType === res.BloodType) {
+              return a.PhoneNumber;
+            }
+          });
+          const phone = phoneNumbers.filter((element) => {
+            return element !== undefined;
+          });
+          const phones = phone.map((a) => {
+            return "+91" + a;
+          });
+          ///console.log(phones);
           try {
+            strapi.services.sms.sendSms(
+              `Contact Person's Name: "${res.name}" at ${
+                res.venue
+              },\n Blood Type:${res.BloodType}, \t Units:${
+                res.units
+              }, \tNeeded till Date:${new Date(res.date).toLocaleDateString(
+                "en-UK"
+              )}.\nPlease check out the website for more info. Link: ${process.env.APP_URL}/${
+                res.slug
+              }`,
+              phones
+            );
             for (let i = 0; i < emails.length; i++) {
               await strapi.plugins["email"].services.email.send({
                 to: emails[i],
-                from: "srijan_201800150@smit.smu.edu.in",
+                from: "sikkim.co.blood@gmail.com",
                 subject: "You have Received a Blood Request  ",
-                text: `Contact Person' Name "${res.name}" at ${
+                text: `Contact Person' Name: "${res.name}" at ${
                   res.venue
                 }\n Blood Type=${res.BloodType} \t Units=${
                   res.units
-                } \t Needed till Time=${new Date(res.date).toLocaleDateString(
+                } \t Needed till Date=${new Date(res.date).toLocaleDateString(
                   "en-UK"
-                )}.\n PLease check out the website for more info. Link: localhost:3000/requests/${
+                )}.\n PLease check out the website for more info. Link: ${process.env.APP_URL}/${
                   res.slug
                 }`,
               });
@@ -75,7 +108,7 @@ module.exports = {
       //const data = await strapi.query('users').find();
       //console.log(data);
       const emails = users.map((a) => a.email);
-      console.log(emails);
+      // console.log(emails);
 
       try {
         for (let i = 0; i < emails.length; i++) {
@@ -83,9 +116,13 @@ module.exports = {
             to: emails[i],
             from: "srijan_201800150@smit.smu.edu.in",
             subject: "Hey admin someone has posted a request on the site ",
-            text: `A Blood Donation Request has been posted on Site.\nHere are some details,\nName:"${res.name}" at ${res.venue} ${new Date(res.date).toLocaleDateString(
+            text: `A Blood Donation Request has been posted on Site.\nHere are some details,\nName:"${
+              res.name
+            }" at ${res.venue} ${new Date(res.date).toLocaleDateString(
               "en-UK"
-            )}\nUnits Required: ${res.units}   of  ${res.BloodType}.\nPLease check out the Admin site for more info`,
+            )}\nUnits Required: ${res.units}   of  ${
+              res.BloodType
+            }.\nPLease check out the Admin site for more info`,
           });
         }
       } catch (err) {
