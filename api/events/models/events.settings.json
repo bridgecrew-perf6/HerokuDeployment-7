@@ -48,7 +48,7 @@
       "model": "user"
     },
     "Phone": {
-      "type": "integer"
+      "type": "biginteger"
     },
     "BloodType": {
       "type": "string"

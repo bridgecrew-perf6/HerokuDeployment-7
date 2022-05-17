@@ -27,6 +27,16 @@
     "Description": {
       "type": "string"
     },
+    "slug": {
+      "type": "uid",
+      "targetField": "Name"
+    },
+    "ContactNumber": {
+      "type": "biginteger"
+    },
+    "People": {
+      "type": "json"
+    },
     "image": {
       "model": "file",
       "via": "related",
@@ -38,16 +48,6 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "Name"
-    },
-    "ContactNumber": {
-      "type": "biginteger"
-    },
-    "People": {
-      "type": "json"
     }
   }
 }
