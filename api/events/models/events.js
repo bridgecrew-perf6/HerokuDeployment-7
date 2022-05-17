@@ -36,7 +36,7 @@ module.exports = {
         const previousPublishedAt = previousData.published_at;
         const currentPublished_at = data.published_at;
         if (currentPublished_at != previousPublishedAt) {
-          console.log("Triggered only when published.");
+         // console.log("Triggered only when published.");
           const users = await strapi
             .query("user", "users-permissions")
             .find({ role: 3 });
@@ -76,6 +76,8 @@ module.exports = {
               }`,
               phones
             );
+
+/*
             for (let i = 0; i < emails.length; i++) {
               await strapi.plugins["email"].services.email.send({
                 to: emails[i],
@@ -91,7 +93,7 @@ module.exports = {
                   res.slug
                 }`,
               });
-            }
+            }*/
           } catch (err) {
             console.log(err);
           }
@@ -101,6 +103,7 @@ module.exports = {
     },
 
     async afterCreate(result) {
+      /*
       const users = await strapi.query("strapi::user").find();
 
       const res = result;
@@ -127,7 +130,7 @@ module.exports = {
         }
       } catch (err) {
         console.log(err);
-      }
+      }*/
     },
   },
 };

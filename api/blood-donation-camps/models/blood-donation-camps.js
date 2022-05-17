@@ -11,7 +11,7 @@ module.exports = {
         const previousPublishedAt = previousData.published_at;
         const currentPublished_at = data.published_at;
         if (currentPublished_at != previousPublishedAt) {
-          console.log("Triggered only when published.");
+          //console.log("Triggered only when published.");
           //console.log(data.Name);g
           const res = await strapi
             .query("blood-donation-camps")
@@ -27,7 +27,7 @@ module.exports = {
           const phones = phone.map((a) => {
             return "+91" + a;
           });
-         // console.log(phones);
+          // console.log(phones);
           let time = res.Time.toString();
           time = time.substring(0, 5);
 
@@ -36,6 +36,7 @@ module.exports = {
               `There is an Upcoming blood donation camp titled   "${res.Name}"\n at ${res.Address} Date=${res.Date}.\nPLease check out the website for more info.\n Link: ${process.env.APP_URL}/${res.slug}   `,
               phones
             );*/
+            /*
             for (let i = 0; i < emails.length; i++) {
               await strapi.plugins["email"].services.email.send({
                 to: emails[i],
@@ -43,7 +44,7 @@ module.exports = {
                 subject: "A Blood Donation Camp Nearby ",
                 text: `There is an Upcoming blood donation camp titled: "${res.Name}"\n at ${res.Address} Date=${res.Date}.\nPLease check out the website for more info.\n Link: ${process.env.APP_URL}/${res.slug}   `,
               });
-            }
+            }*/
           } catch (err) {
             console.log(err);
           }
