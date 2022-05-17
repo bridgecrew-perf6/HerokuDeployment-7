@@ -65,13 +65,21 @@ module.exports = {
           ///console.log(phones);
           try {
             strapi.services.sms.sendSms(
-              `Contact Person's Name: "${res.name}" at ${
+              `
+              You have received a Blood Request.
+              \n
+              
+              Contact Person's Name: "${res.name}" at ${
                 res.venue
               },\n Blood Type:${res.BloodType}, \t Units:${
                 res.units
-              }, \tNeeded till Date:${new Date(res.date).toLocaleDateString(
+              }, \nDate:${new Date(res.date).toLocaleDateString(
                 "en-UK"
-              )}.\nPlease check out the website for more info. Link: ${process.env.APP_URL}/${
+              )}.\n Contact Details: ${res.Phone}.
+                 \n Venue: ${res.venue}
+
+              
+              \nPlease check out the website for more info. Link: ${process.env.APP_URL}/${
                 res.slug
               }`,
               phones
