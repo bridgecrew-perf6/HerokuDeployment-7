@@ -63,8 +63,15 @@ module.exports = {
             return "+91" + a;
           });
           console.log(phones);
+          if(phones.length===0)
+          {
+            //console.log("return code");
+            return;
+          }
+          else
+          {
           try {
-            strapi.services.sms.sendSms(
+             strapi.services.sms.sendSms(
               `
               You have received a Blood Request.
               \n
@@ -105,6 +112,7 @@ module.exports = {
           } catch (err) {
             console.log(err);
           }
+        }
           //console.log(data.Name);g
         }
       }
