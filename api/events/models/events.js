@@ -62,8 +62,9 @@ module.exports = {
           const phones = phone.map((a) => {
             return "+91" + a;
           });
-          ///console.log(phones);
+          console.log(phones);
           try {
+            
             strapi.services.sms.sendSms(
               `
               You have received a Blood Request.
@@ -102,7 +103,9 @@ module.exports = {
                 }`,
               });
             }*/
-          } catch (err) {
+          } 
+        
+          catch (err) {
             console.log(err);
           }
           //console.log(data.Name);g
