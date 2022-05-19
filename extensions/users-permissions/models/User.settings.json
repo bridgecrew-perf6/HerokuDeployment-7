@@ -86,6 +86,9 @@
     },
     "address": {
       "type": "string"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }
