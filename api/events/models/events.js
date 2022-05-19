@@ -10,7 +10,7 @@ module.exports = {
         var text = "XL";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < 12; i++)
           text += possible.charAt(Math.floor(Math.random() * possible.length));
 
         data.slug = slugify(text, { lower: true });
@@ -36,7 +36,7 @@ module.exports = {
         const previousPublishedAt = previousData.published_at;
         const currentPublished_at = data.published_at;
         if (currentPublished_at != previousPublishedAt) {
-         // console.log("Triggered only when published.");
+          // console.log("Triggered only when published.");
           const users = await strapi
             .query("user", "users-permissions")
             .find({ role: 3 });
@@ -64,7 +64,6 @@ module.exports = {
           });
           console.log(phones);
           try {
-            
             strapi.services.sms.sendSms(
               `
               You have received a Blood Request.
@@ -80,13 +79,13 @@ module.exports = {
                  \n Venue: ${res.venue}
 
               
-              \nPlease check out the website for more info. Link: ${process.env.APP_URL}/${
-                res.slug
-              }`,
+              \nPlease check out the website for more info. Link: ${
+                process.env.APP_URL
+              }/requests${res.slug}`,
               phones
             );
 
-/*
+            /*
             for (let i = 0; i < emails.length; i++) {
               await strapi.plugins["email"].services.email.send({
                 to: emails[i],
@@ -103,9 +102,7 @@ module.exports = {
                 }`,
               });
             }*/
-          } 
-        
-          catch (err) {
+          } catch (err) {
             console.log(err);
           }
           //console.log(data.Name);g
