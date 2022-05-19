@@ -81,7 +81,7 @@ module.exports = {
               
               \nPlease check out the website for more info. Link: ${
                 process.env.APP_URL
-              }/requests${res.slug}`,
+              }/requests/${res.slug}`,
               phones
             );
 
